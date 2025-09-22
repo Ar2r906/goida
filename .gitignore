@@ -3,5 +3,7 @@ node_modules/
 
 # конфиги и приватные данные
 .env
-configs/
-
+secrets/
+config/
+db_config.js
+connection.js
