@@ -12,11 +12,13 @@ const cors = require('cors')
 const port = process.env.PORT
 
 const info_routes = require('./routes/files');
+const pars_sites = require('./routes/parser')
 
 app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use('/api/back', info_routes);
+app.use('/api/back', pars_sites);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((error, request, response, next) => {

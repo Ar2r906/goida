@@ -8,6 +8,35 @@ servers:
   - url: http://localhost:3000/api/back
 
 paths:
+  /v1/parser/run:
+    post:
+      summary: Запустить парсер документов
+      tags:
+        - Parser
+      requestBody:
+        description: (не требуется) Ручка запускает парсер автоматически
+        required: false
+      responses:
+        '200':
+          description: Парсер успешно выполнен
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Парсер успешно выполнен"
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Ошибка выполнения парсера"
   /v1/info/all_files:
     get:
       summary: Получить все файлы
@@ -48,6 +77,7 @@ paths:
           description: Файл не найден
         '500':
           description: Внутренняя ошибка сервера
+
     delete:
       summary: Удалить файл по ID
       tags:
@@ -102,23 +132,31 @@ components:
       properties:
         id:
           type: string
+          example: "1"
         title:
           type: string
+          example: "Закон об ИИ"
         description:
           type: string
+          example: "Документ описывает требования к ИИ системам"
         publication_date:
           type: string
           format: date-time
+          example: "2025-09-22T18:35:56.594Z"
         tag:
           type: string
+          example: "article"
         file:
           type: string
+          example: "files/law_1.pdf"
         create_date:
           type: string
           format: date-time
+          example: "2025-09-22T18:35:56.594Z"
         update_date:
           type: string
           format: date-time
+          example: "2025-09-22T18:35:56.594Z"
       required:
         - id
         - title
@@ -134,15 +172,20 @@ components:
       properties:
         title:
           type: string
+          example: "Закон об ИИ"
         description:
           type: string
+          example: "Документ описывает требования к ИИ системам"
         publication_date:
           type: string
           format: date-time
+          example: "2025-09-22T18:35:56.594Z"
         tag:
           type: string
+          example: "article"
         file:
           type: string
+          example: "files/law_1.pdf"
       required:
         - title
         - description
