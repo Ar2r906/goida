@@ -1,4 +1,4 @@
-const { sequelize } = require('../config/connection')
+const sequelize = require('../config/connection')
 const { DataTypes } = require('sequelize')
 
 const File_info = sequelize.define(
@@ -16,12 +16,14 @@ const File_info = sequelize.define(
 
     {
         tableName: 'file_info',
-        timestamps: true
+        timestamps: true,
+        createdAt: 'create_date',
+        updatedAt: 'update_date'
     }
 )
 
 async function get_file_info() {
     await File_info.sync()
-    console.lof('Sync sucessfully')
+    console.log('Sync sucessfully')
 }
 module.exports = File_info

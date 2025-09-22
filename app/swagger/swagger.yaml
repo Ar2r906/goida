@@ -1,0 +1,151 @@
+openapi: 3.0.3
+info:
+  title: Goida File Info API
+  description: API для работы с файлами
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/back
+
+paths:
+  /v1/info/all_files:
+    get:
+      summary: Получить все файлы
+      tags:
+        - File_info
+      responses:
+        '200':
+          description: Список файлов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FileInfo'
+        '500':
+          description: Внутренняя ошибка сервера
+
+  /v1/info/file/{id}:
+    get:
+      summary: Получить файл по ID
+      tags:
+        - File_info
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID файла
+      responses:
+        '200':
+          description: Файл найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileInfo'
+        '404':
+          description: Файл не найден
+        '500':
+          description: Внутренняя ошибка сервера
+    delete:
+      summary: Удалить файл по ID
+      tags:
+        - File_info
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID файла
+      responses:
+        '200':
+          description: Файл удален
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Файл не найден
+        '500':
+          description: Внутренняя ошибка сервера
+
+  /v1/info/file:
+    post:
+      summary: Создать новый файл
+      tags:
+        - File_info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileInfoInput'
+      responses:
+        '201':
+          description: Файл создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileInfo'
+        '500':
+          description: Внутренняя ошибка сервера
+
+components:
+  schemas:
+    FileInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        publication_date:
+          type: string
+          format: date-time
+        tag:
+          type: string
+        file:
+          type: string
+        create_date:
+          type: string
+          format: date-time
+        update_date:
+          type: string
+          format: date-time
+      required:
+        - id
+        - title
+        - description
+        - publication_date
+        - tag
+        - file
+        - create_date
+        - update_date
+
+    FileInfoInput:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        publication_date:
+          type: string
+          format: date-time
+        tag:
+          type: string
+        file:
+          type: string
+      required:
+        - title
+        - description
+        - publication_date
+        - tag
+        - file
