@@ -5,7 +5,7 @@ services:
     container_name: goida_db
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: asdF0987
       POSTGRES_DB: goida
     ports:
       - "5432:5432"
@@ -18,7 +18,7 @@ services:
     environment:
       DB_HOST: db
       DB_USER: postgres
-      DB_PASS: postgres
+      DB_PASS: asdF0987
       DB_NAME: goida
       PORT: 3000
     ports:
